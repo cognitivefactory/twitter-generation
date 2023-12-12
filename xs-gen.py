@@ -42,6 +42,15 @@ if sys.version_info < (3, 8):
 
 
 if __name__ == "__main__":
+    from termcolor import colored
+    from alive_progress import config_handler
+    from alive_progress.animations.bars import bar_factory
+    from alive_progress.animations.spinners import frame_spinner_factory
+
     from src.cli import gp_parser, CliApp
+
+    bar = bar_factory("\u2501", borders=(" ", " "), background=" ")
+    spinner = frame_spinner_factory([colored(p, "cyan") for p in "⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"])
+    config_handler.set_global(length=40, max_cols=110, enrich_print=False, bar=bar, spinner=spinner)
 
     CliApp().check_args(gp_parser().parse_args()).run()
