@@ -1,5 +1,6 @@
 import os
 import re
+import logging
 
 from ..helper.auto_numbered import AutoNumberedEnum
 
@@ -13,6 +14,7 @@ class ExportAdapterFormat(AutoNumberedEnum):
 
 class ExportAdapter:
     def __init__(self, path: str = "a.out") -> None:
+        self.logger = logging.getLogger("ea")
         self.__path = path
         try:
             os.makedirs(os.path.dirname(self.__path))
@@ -29,6 +31,9 @@ class ExportAdapter:
                     # it should contain a list of tweets beginning with a number and a dot (1. )
                     # and ending with a newline
                     tweets: list[str] = re.findall(r"\d+\.\s.*\n", data)
+                    tweets = list(map(lambda t: t[t.find(".") + 1 : -1].strip(), tweets))
+                    self.logger.debug("got %d tweets", len(tweets))
+
                     for tweet in tweets:
                         f.write(f"{topic}\t{sentiment}\t{tweet}\n")
             case _:
