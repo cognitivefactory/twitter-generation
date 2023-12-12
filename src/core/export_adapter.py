@@ -16,10 +16,10 @@ class ExportAdapter:
         self.__path = path
         try:
             os.makedirs(os.path.dirname(self.__path))
-        except FileExistsError:
+        except (FileExistsError, FileNotFoundError):
             pass
         try:
-            os.remove(self.__path)
+            os.unlink(self.__path)
         except FileNotFoundError:
             pass
 
