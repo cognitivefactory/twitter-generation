@@ -36,5 +36,11 @@ class ExportAdapter:
 
                     for tweet in tweets:
                         f.write(f"{topic}\t{sentiment}\t{tweet}\n")
+
+                with open(f"{self.__path}.raw", "a", encoding="utf-8") as f:
+                    # hehe
+                    f.write(f"---\n\n{topic} {sentiment}\n")
+                    f.write(data)
+
             case _:
                 raise NotImplementedError(f"Export format {format} is not supported.")
