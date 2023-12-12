@@ -116,7 +116,7 @@ class Args:
     command: Command = Command.RUN
 
     # run subcommand
-    topics_file_paths: str = os.path.join("assets", "config", "topics.txt")
+    topics_file_path: str = os.path.join("assets", "config", "topics.txt")
     sentiments_file_path: str = os.path.join("assets", "config", "sentiments.txt")
     output_file_path: str = "tweets.txt"
     local_lang: str = "en"
