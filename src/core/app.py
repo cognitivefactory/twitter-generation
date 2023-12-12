@@ -1,7 +1,9 @@
 import logging
 
+from alive_progress import alive_it
+
 from .export_adapter import ExportAdapter
-from .prompt_generator import SomethingGenerator, PrompGenerator
+from .prompt_generator import SomethingGenerator, PromptGenerator
 from .model import Model
 
 __all__ = ["App"]
@@ -23,8 +25,8 @@ class App:
         topic_generator = SomethingGenerator(topics_file_path)
         sentiment_generator = SomethingGenerator(sentiments_file_path)
 
-        prompt_generator = PrompGenerator(topic_generator, sentiment_generator)
+        prompt_generator = PromptGenerator(topic_generator, sentiment_generator)
 
-        for t, s in prompt_generator:
+        for t, s in alive_it(prompt_generator):  # (str, str) because 2 generators
             r = self.model.generate(t, s, local_lang)
-            dispatcher.export(f"{t};{s};{r}\n")
+            dispatcher.export(t, s, r)

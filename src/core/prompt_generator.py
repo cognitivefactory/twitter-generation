@@ -6,7 +6,7 @@ from typing import Generator
 from itertools import product
 
 
-__all__ = ["SomethingGenerator", "PrompGenerator", "find_possible_topics_file_paths"]
+__all__ = ["SomethingGenerator", "PromptGenerator", "find_possible_topics_file_paths"]
 
 is_whitespace = re.compile(r"\s+").match
 
@@ -40,7 +40,7 @@ class SomethingGenerator:
                     yield line
 
 
-class PrompGenerator:
+class PromptGenerator:
     def __init__(self, *args: SomethingGenerator) -> None:
         self.logger = logging.getLogger("prompt_generator")
         self.__generators = args

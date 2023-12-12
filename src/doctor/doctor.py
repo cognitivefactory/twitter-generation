@@ -3,10 +3,7 @@ import os
 from typing import NoReturn
 import logging
 
-from termcolor import colored
-from alive_progress import alive_bar, config_handler
-from alive_progress.animations.bars import bar_factory
-from alive_progress.animations.spinners import frame_spinner_factory
+from alive_progress import alive_bar
 
 from ..core import find_possible_topics_file_paths
 
@@ -18,10 +15,6 @@ class Doctor:
     def __init__(self, colored_output: bool = False) -> None:
         self.logger = logging.getLogger("doctor")
         self.__colored_output = colored_output
-
-        __bar = bar_factory("\u2501", borders=(" ", " "), background=" ")
-        __spinner = frame_spinner_factory([colored(p, "cyan") if colored_output else p for p in "⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"])
-        config_handler.set_global(length=40, max_cols=110, enrich_print=False, bar=__bar, spinner=__spinner)
 
     def doctor(self) -> int:
         """Run the doctor and returns the number of warnings"""

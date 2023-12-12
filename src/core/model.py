@@ -51,4 +51,5 @@ class Model:
     def generate(self, topic: str, sentiment: str, language: str = "en") -> str:
         prompt = MASK.get(language, MASK["default"])
         prompt = prompt.replace("<topic>", topic).replace("<sentiment>", sentiment)
-        return self.__generate(prompt), topic, sentiment
+        prompt += "\n1. "
+        return self.__generate(prompt)
