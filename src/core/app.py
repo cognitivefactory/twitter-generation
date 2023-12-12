@@ -36,6 +36,7 @@ class App:
                 # (str, str) because 2 generators
                 if senti_number == sentiment_generator.count:
                     senti_number = 0
+                    topic_number += 1
 
                 bar.title(f"generating #{topic_number + 1}({senti_number + 1})")
                 r = self.model.generate(t, s, local_lang)
@@ -43,5 +44,4 @@ class App:
                 dispatcher.export(t, s, r)
                 bar()
 
-                topic_number += 1
                 senti_number += 1
