@@ -1,6 +1,6 @@
 import logging
 
-from alive_progress import alive_it
+from alive_progress import alive_bar
 
 from .export_adapter import ExportAdapter
 from .prompt_generator import SomethingGenerator, PromptGenerator
@@ -27,6 +27,10 @@ class App:
 
         prompt_generator = PromptGenerator(topic_generator, sentiment_generator)
 
-        for t, s in alive_it(prompt_generator):  # (str, str) because 2 generators
-            r = self.model.generate(t, s, local_lang)
-            dispatcher.export(t, s, r)
+        with alive_bar(prompt_generator.count) as bar:
+            for t, s in prompt_generator:
+                # (str, str) because 2 generators
+                bar.title(f"{t} {s}")
+                r = self.model.generate(t, s, local_lang)
+                dispatcher.export(t, s, r)
+                bar()

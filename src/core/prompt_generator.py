@@ -3,6 +3,7 @@ import re
 import os
 from typing import Generator
 
+from math import prod
 from itertools import product
 
 
@@ -31,6 +32,7 @@ class SomethingGenerator:
     def __init__(self, filepath: str) -> None:
         self.logger = logging.getLogger("generator")
         self.__path = filepath
+        self.__count: int = None
 
     def __iter__(self) -> Generator[str, None, None]:
         with open(self.__path, "r", encoding="utf-8") as f:
@@ -39,12 +41,25 @@ class SomethingGenerator:
                 if line and not is_whitespace(line):
                     yield line
 
+    @property
+    def count(self) -> int:
+        if self.__count is None:
+            self.__count = sum(1 for _ in self)
+        return self.__count
+
 
 class PromptGenerator:
     def __init__(self, *args: SomethingGenerator) -> None:
         self.logger = logging.getLogger("prompt_generator")
         self.__generators = args
+        self.__count: int = None
 
     def __iter__(self) -> Generator[tuple[str, ...], None, None]:
         for p in product(*self.__generators):
             yield p
+
+    @property
+    def count(self) -> int:
+        if self.__count is None:
+            self.__count = prod(g.count for g in self.__generators)
+        return self.__count
