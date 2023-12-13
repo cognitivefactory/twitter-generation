@@ -5,7 +5,7 @@ import logging
 
 from alive_progress import alive_bar
 
-from ..core import find_possible_topics_file_paths
+from ..core import find_possible_topics_file_paths, find_possible_sentiments_file_paths
 
 
 __all__ = ["Doctor"]
@@ -26,13 +26,22 @@ class Doctor:
         # check if all files are present
         # animate progress bar for each file
 
-        __total_items = 3
+        __total_items = 4
         warnings = 0
         with alive_bar(__total_items, title="Checking files  ") as bar:
             # checking topics file
             bar.text("topics file")
             if len(find_possible_topics_file_paths()) == 0:
                 self.logger.warning("No topics file candidate found - you would have to specify it manually")
+                warnings += 1
+            bar()
+
+            # checking sentiments file
+            bar.text("sentiments file")
+            if len(find_possible_sentiments_file_paths()) == 0:
+                self.logger.warning(
+                    "No sentiments file candidate found - you would have to specify it manually"
+                )
                 warnings += 1
             bar()
 

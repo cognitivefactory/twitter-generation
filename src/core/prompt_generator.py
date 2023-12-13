@@ -7,14 +7,13 @@ from math import prod
 from itertools import product
 
 
-__all__ = ["SomethingGenerator", "PromptGenerator", "find_possible_topics_file_paths"]
+__all__ = ["SomethingGenerator", "PromptGenerator", "find_possible_topics_file_paths", "find_possible_sentiments_file_paths"]
 
 is_whitespace = re.compile(r"\s+").match
 
 
-def find_possible_topics_file_paths() -> list[str]:
+def __find_possible_something_file_paths(names: set[str]) -> list[str]:
     # list of filenames to search for w/o extension
-    __names = {"topics", "list", "subjects", "config"}
     pfp = []
 
     for root, dirs, files in os.walk(os.getcwd(), topdown=True):
@@ -23,10 +22,16 @@ def find_possible_topics_file_paths() -> list[str]:
             if file.endswith(".py"):  # ignore python files (e.g. "topics.py")
                 continue
             name, ext = os.path.splitext(os.path.basename(file))
-            if ext.lower().endswith("txt") and name in __names:
+            if ext.lower().endswith("txt") and name in names:
                 pfp.append(os.path.join(root, file))
     return pfp
 
+
+def find_possible_topics_file_paths () -> list[str]:
+    return __find_possible_something_file_paths({"topics", "list", "subjects"})
+
+def find_possible_sentiments_file_paths () -> list[str]:
+    return __find_possible_something_file_paths({"sentiments", "feelings", "emotions"})
 
 class SomethingGenerator:
     def __init__(self, filepath: str) -> None:

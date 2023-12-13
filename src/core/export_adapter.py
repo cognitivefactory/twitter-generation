@@ -39,7 +39,7 @@ class ExportAdapter:
 
                 with open(f"{self.__path}.raw", "a", encoding="utf-8") as f:
                     # hehe
-                    f.write(f"---\n\n{topic} {sentiment}\n")
+                    f.write(f"\n\n---\n{topic} {sentiment}\n")
                     f.write(data)
 
             case _:

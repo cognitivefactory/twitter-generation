@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from argparse import ArgumentParser, Namespace
 
 from ..doctor import Doctor
-from ..core import App
+from ..core import App, find_possible_sentiments_file_paths, find_possible_topics_file_paths
 
 from ..version import __version__
 from ..helper.auto_numbered import AutoNumberedEnum
@@ -47,7 +47,7 @@ def gp_parser() -> ArgumentParser:
     run_parser.add_argument(
         "-i",
         "--input-topics",
-        help="topic file path (file used to retrieve the list of topics) (default: assets/config/topics.txt)",
+        help="topic file path (file used to retrieve the list of topics) (default: auto)",
         default=None,
     )
     run_parser.add_argument(
@@ -59,7 +59,7 @@ def gp_parser() -> ArgumentParser:
     run_parser.add_argument(
         "-s",
         "--sentiments",
-        help="sentiments file path (file used to retrieve the list of sentiments) (default: assets/config/sentiments.txt)",
+        help="sentiments file path (file used to retrieve the list of sentiments) (default: auto)",
         default=None,
     )
     run_parser.add_argument(
@@ -116,8 +116,8 @@ class Args:
     command: Command = Command.RUN
 
     # run subcommand
-    topics_file_path: str = os.path.join("assets", "config", "topics.txt")
-    sentiments_file_path: str = os.path.join("assets", "config", "sentiments.txt")
+    topics_file_path: str = None
+    sentiments_file_path: str = None
     output_file_path: str = "tweets.txt"
     local_lang: str = "en"
     debug: bool = False
@@ -205,6 +205,16 @@ class CliApp:
         match self.__args.command:
             case Command.RUN:
                 logger.debug('Got "run" command')
+                if self.__args.topics_file_path is None:
+                    try:
+                        self.__args.topics_file_path = find_possible_topics_file_paths()[0]
+                    except IndexError:
+                        logger.critical("No topics file found - please specify it manually")
+                if self.__args.sentiments_file_path is None:
+                    try:
+                        self.__args.sentiments_file_path = find_possible_sentiments_file_paths()[0]
+                    except IndexError:
+                        logger.critical("No sentiments file found - please specify it manually")
                 App().run(
                     self.__args.topics_file_path,
                     self.__args.sentiments_file_path,

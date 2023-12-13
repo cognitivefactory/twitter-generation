@@ -3,32 +3,20 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 
 MASK = {
     "en": """
-Generate tweets about <topic> from the user perspective, making them look as real as possible.
-The tweets should be as diverse as possible and users should feel <sentiment> about the topic.
+Generate tweets in English about "<topic>" from the user perspective, making them look as real as possible.
+The tweets should be in English, as diverse as possible and users should feel <sentiment> about the topic.
 """,
     "fr": """
-Génère des tweets sur <topic> du point de vue de l'utilisateur, en les rendant aussi réels que possible.
-Les tweets doivent être aussi diversifiés que possible et les utilisateurs doivent être <sentiment> à propos du sujet.
+Génère des tweets en français sur "<topic>" du point de vue de l'utilisateur, en les rendant aussi réels que possible.
+Les tweets doivent être en français, aussi diversifiés que possible et les utilisateurs doivent ressentir <sentiment> à propos du sujet.
 """,
     "de": """
-Generieren Sie Tweets über <topic> aus der Sicht des Benutzers, so real wie möglich.
-Die Tweets sollten so vielfältig wie möglich sein und die Benutzer sollten <sentiment> zum Thema fühlen.
-""",
-    "es": """
-Genere tweets sobre <topic> desde la perspectiva del usuario, haciéndolos lo más reales posible.
-Los tweets deben ser lo más diversos posible y los usuarios deben sentir <sentiment> sobre el tema.
-""",
-    "it": """
-Genera tweet su <topic> dal punto di vista dell'utente, rendendoli il più realistici possibile.
-I tweet dovrebbero essere il più diversi possibile e gli utenti dovrebbero sentire <sentiment> sul tema.
-""",
-    "pt": """
-Gere tweets sobre <topic> do ponto de vista do usuário, tornando-os o mais reais possível.
-Os tweets devem ser o mais diversificados possível e os usuários devem sentir <sentiment> sobre o tópico.
+Generieren Sie Tweets auf Deutsch über "<topic>" aus der Nutzerperspektive, so real wie möglich.
+Die Tweets sollten auf Deutsch sein, so vielfältig wie möglich und die Nutzer sollten <sentiment> zum Thema empfinden.
 """,
     "default": """
-Generate tweets about <topic> from the user perspective, making them look as real as possible.
-The tweets should be as diverse as possible and users should feel <sentiment> about the topic.
+Generate tweets in English about "<topic>" from the user perspective, making them look as real as possible.
+The tweets should be in English, as diverse as possible and users should feel <sentiment> about the topic.
 """,
 }
 
