@@ -7,7 +7,12 @@ from math import prod
 from itertools import product
 
 
-__all__ = ["SomethingGenerator", "PromptGenerator", "find_possible_topics_file_paths", "find_possible_sentiments_file_paths"]
+__all__ = [
+    "SomethingGenerator",
+    "PromptGenerator",
+    "find_possible_topics_file_paths",
+    "find_possible_sentiments_file_paths",
+]
 
 is_whitespace = re.compile(r"\s+").match
 
@@ -27,11 +32,13 @@ def __find_possible_something_file_paths(names: set[str]) -> list[str]:
     return pfp
 
 
-def find_possible_topics_file_paths () -> list[str]:
+def find_possible_topics_file_paths() -> list[str]:
     return __find_possible_something_file_paths({"topics", "list", "subjects"})
 
-def find_possible_sentiments_file_paths () -> list[str]:
+
+def find_possible_sentiments_file_paths() -> list[str]:
     return __find_possible_something_file_paths({"sentiments", "feelings", "emotions"})
+
 
 class SomethingGenerator:
     def __init__(self, filepath: str) -> None:
