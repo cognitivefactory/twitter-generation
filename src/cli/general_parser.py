@@ -160,7 +160,7 @@ class CliApp:
 
             if nsp.local:
                 # check if local is valid
-                if nsp.local not in {"fr", "en", "es", "de", "it", "pt"}:
+                if nsp.local not in {"fr", "en", "de"}:
                     raise ValueError(f"Unknown local {nsp.local}")
                 self.__args.local_lang = nsp.local
 

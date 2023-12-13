@@ -3,25 +3,28 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 
 MASK = {
     "en": """
-Generate tweets in English about "<topic>" from the user perspective, making them look as real as possible.
-The tweets should be in English, as diverse as possible and users should feel <sentiment> about the topic.
+Generate tweets about "<topic>" from the user perspective, making them look as real as possible.
+The tweets should be as diverse as possible and users should feel <sentiment> about the topic.
 """,
     "fr": """
-Génère des tweets en français sur "<topic>" du point de vue de l'utilisateur, en les rendant aussi réels que possible.
-Les tweets doivent être en français, aussi diversifiés que possible et les utilisateurs doivent ressentir <sentiment> à propos du sujet.
+Génère des tweets sur "<topic>" du point de vue de l'utilisateur, en les rendant aussi réels que possible.
+Les tweets doivent être aussi diversifiés que possible et les utilisateurs doivent ressentir <sentiment> à propos du sujet.
 """,
     "de": """
-Generieren Sie Tweets auf Deutsch über "<topic>" aus der Nutzerperspektive, so real wie möglich.
-Die Tweets sollten auf Deutsch sein, so vielfältig wie möglich und die Nutzer sollten <sentiment> zum Thema empfinden.
+Generieren Sie Tweets über "<topic>" aus der Nutzerperspektive, so real wie möglich.
+Die Tweets sollten so vielfältig wie möglich und die Nutzer sollten <sentiment> zum Thema empfinden.
 """,
     "default": """
-Generate tweets in English about "<topic>" from the user perspective, making them look as real as possible.
-The tweets should be in English, as diverse as possible and users should feel <sentiment> about the topic.
+Generate tweets about "<topic>" from the user perspective, making them look as real as possible.
+The tweets should be as diverse as possible and users should feel <sentiment> about the topic.
 """,
 }
 
 
 class Model:
+    heading = "\n1. "
+    epilogue = "\n"
+
     def __init__(self) -> None:
         self.model = AutoModelForCausalLM.from_pretrained("Xwin-LM/Xwin-LM-7B-V0.2")
         self.tokenizer = AutoTokenizer.from_pretrained("Xwin-LM/Xwin-LM-7B-V0.2")
@@ -39,5 +42,5 @@ class Model:
     def generate(self, topic: str, sentiment: str, language: str = "en") -> str:
         prompt = MASK.get(language, MASK["default"])
         prompt = prompt.replace("<topic>", topic).replace("<sentiment>", sentiment)
-        prompt += "\n1. "
-        return self.__generate(prompt)
+        prompt += self.heading
+        return self.heading + self.__generate(prompt) + self.epilogue
