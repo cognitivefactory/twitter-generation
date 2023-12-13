@@ -5,18 +5,22 @@ MASK = {
     "en": """
 Generate tweets about "<topic>" from the user perspective, making them look as real as possible.
 The tweets should be as diverse as possible and users should feel <sentiment> about the topic.
+Do generate anything that is not a tweet.
 """,
     "fr": """
 Génère des tweets sur "<topic>" du point de vue de l'utilisateur, en les rendant aussi réels que possible.
 Les tweets doivent être aussi diversifiés que possible et les utilisateurs doivent ressentir <sentiment> à propos du sujet.
+Ne génère rien qui ne soit pas un tweet.
 """,
     "de": """
 Generieren Sie Tweets über "<topic>" aus der Nutzerperspektive, so real wie möglich.
 Die Tweets sollten so vielfältig wie möglich und die Nutzer sollten <sentiment> zum Thema empfinden.
+Generieren Sie nichts, was kein Tweet ist.
 """,
     "default": """
 Generate tweets about "<topic>" from the user perspective, making them look as real as possible.
 The tweets should be as diverse as possible and users should feel <sentiment> about the topic.
+Do generate anything that is not a tweet.
 """,
 }
 
