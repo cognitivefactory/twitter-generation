@@ -1,5 +1,4 @@
 import os
-import re
 import logging
 
 from ..helper.auto_numbered import AutoNumberedEnum
