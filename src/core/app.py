@@ -45,3 +45,5 @@ class App:
                 bar()
 
                 senti_number += 1
+
+        self.logger.info("done")
