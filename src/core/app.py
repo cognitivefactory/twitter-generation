@@ -41,7 +41,7 @@ class App:
                 bar.title(f"generating #{topic_number + 1}({senti_number + 1})")
                 r = self.model.generate(t, s, local_lang)
                 bar.title(f" exporting #{topic_number + 1}({senti_number + 1})")
-                dispatcher.export(t, s, r)
+                dispatcher.export(t, s, r)  #! destroys r
                 bar()
 
                 senti_number += 1
