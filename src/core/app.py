@@ -10,8 +10,8 @@ __all__ = ["App"]
 
 
 class App:
-    def __init__(self) -> None:
-        self.model = Model()
+    def __init__(self, gpu_id: int = 0, temperature: float = 0.7) -> None:
+        self.model = Model(gpu_id, temperature)
         self.logger = logging.getLogger("app")
 
     def run(
@@ -31,7 +31,7 @@ class App:
         topic_number = 0
         senti_number = 0
 
-        with alive_bar(prompt_generator.count) as bar:
+        with alive_bar(prompt_generator.count, calibrate=0xF) as bar:
             for t, s in prompt_generator:
                 # (str, str) because 2 generators
                 if senti_number == sentiment_generator.count:
