@@ -40,7 +40,10 @@ def gp_parser() -> ArgumentParser:
     ## Returns
     `ArgumentParser` - New general parser.
     """
-    parser = ArgumentParser(description="Xs (former tweets) Generator")
+    parser = ArgumentParser(
+        description="Xs (former tweets) Generator",
+        epilog="https://github.com/cognitivefactory/twitter-generation",
+    )
     parser.add_argument("-v", "--version", action="version", version=f"%(prog)s {__version__}")
 
     subparsers = parser.add_subparsers(dest="command", help="command to run")

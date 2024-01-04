@@ -52,7 +52,7 @@ Here are 10 tweets about "<topic>" for this <sentiment> user.
 
 class Model:
     heading = '\n1. "'
-    epilogue = "\n"
+    epilog = "\n"
 
     def __init__(self, gpu_id: int = 0, temperature: float = 0.7) -> None:
         self.logger = logging.getLogger("model")
@@ -101,7 +101,7 @@ class Model:
         prompt = MASK.get(language, MASK["default"])
         prompt = prompt.replace("<topic>", topic).replace("<sentiment>", sentiment)
         prompt += self.heading
-        return self.heading + self.__generate(prompt) + self.epilogue
+        return self.heading + self.__generate(prompt) + self.epilog
 
     def batch_generate(self, topics: list[str], sentiments: list[str], language: str = "en") -> list[str]:
         """
@@ -115,5 +115,5 @@ class Model:
                 prompt = prompt.replace("<topic>", topic).replace("<sentiment>", sentiment)
                 prompt += self.heading
                 prompts.append(prompt)
-        # return list with heading and epilogue added to each tweet
-        return [self.heading + tweet + self.epilogue for tweet in self.__batch_generate(prompts)]
+        # return list with heading and epilog added to each tweet
+        return [self.heading + tweet + self.epilog for tweet in self.__batch_generate(prompts)]
