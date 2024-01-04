@@ -4,22 +4,49 @@ layout: home
 
 hero:
   name: "twitter-generation"
-  text: "Generation of tweets according a given subject. (SDIA 2023 project for TPS students)"
-  tagline: My great project tagline
+  text: "Generation of realistic tweets using LLMs"
+  tagline: A Télécom Physique Strasbourg Study
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Get Started
+      link: /pages/get-started
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Publications
+      link: /pages/publications
+  image:
+    src: /favicon.png
+    alt: VitePress
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - icon: ✏️
+    title: Documentation
+    details: Everything you need to know about the code.
+  - icon: 📊
+    title: Results
+    details: Results of our experiments and analysis of performance.
+  - icon: 📚
+    title: Publications
+    details: Publications related to our work.
 ---
 
+<style>
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
+
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, #bd34fe 50%, #47caff 50%);
+  --vp-home-hero-image-filter: blur(44px);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --vp-home-hero-image-filter: blur(56px);
+  }
+}
+
+@media (min-width: 960px) {
+  :root {
+    --vp-home-hero-image-filter: blur(68px);
+  }
+}
+</style>
