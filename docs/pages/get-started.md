@@ -20,16 +20,16 @@ You do not explicitly need a conda environment for the bot to run. But it is alw
 First, install the dependencies :
 
 ```bash
-conda create -n xsg python=3.10
-conda activate xsg
-pip install -r requirements.txt
-python xs-gen do doctor
+conda create -n xsg python=3.10  # get python 3.10 for torch
+conda activate xsg               # env
+pip install -r requirements.txt  # install pip deps
+python xs-gen do doctor          # check install
 ```
 
-Then, you need to provide a list of topics and sentiments to the app. You can do so by creating two files in the `assets/config` folder, `subjects.txt` and `sentiments.txt`. Each file should contain one topic or sentiment per line.
+Then, you need to provide a list of topics and sentiments to the app. You can do so by creating two files in the `assets/config` folder, `topics.txt` and `sentiments.txt`. Each file should contain one topic or sentiment per line.
 
 ```txt
-# assets/config/subjects.txt
+# assets/config/topics.txt
 pizza
 burger
 fries
@@ -53,7 +53,7 @@ conda env create -f environment.yml
 conda activate xsg
 
 printf "positive\nnegative\nneutral\n" > assets/config/sentiments.txt
-printf "pizza\nMia Khalifa\n" > assets/config/subjects.txt
+printf "pizza\nMia Khalifa\n" > assets/config/topics.txt
 
 python xs-gen.py run
 ```

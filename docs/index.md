@@ -11,8 +11,8 @@ hero:
       text: Get Started
       link: /pages/get-started
     - theme: alt
-      text: Publications
-      link: /pages/publications
+      text: View on GitHub
+      link: https://github.com/cognitivefactory/twitter-generation
   image:
     src: /favicon.png
     alt: VitePress

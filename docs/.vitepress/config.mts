@@ -21,6 +21,8 @@ export default defineConfig({
 
     nav: [
       { text: "Home", link: "/" },
+      { text: "Documentation", link: "/pages/get-started"},
+      { text: "Results", link: "/pages/results" },
       { text: "Publications", link: "/pages/publications" },
     ],
 
@@ -37,6 +39,7 @@ export default defineConfig({
       {
         text: "Results",
         items: [
+          { text: "📊 Results", link: "/pages/results" },
         ],
       }
     ],
