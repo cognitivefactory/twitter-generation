@@ -56,6 +56,6 @@ class ChronoContext:
         ## Returns
         `str` - formatted elapsed time
         """
-        
+
         # use property so it raises error if not done
         return time.strftime(fmt, time.gmtime(self.elapsed))
