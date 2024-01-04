@@ -6,13 +6,18 @@ from .export_adapter import ExportAdapter
 from .prompt_generator import SomethingGenerator, PromptGenerator
 from .model import Model
 
+from ..helper.chrono import ChronoContext
+
 __all__ = ["App"]
 
 
 class App:
     def __init__(self, gpu_id: int = 0, temperature: float = 0.7) -> None:
-        self.model = Model(gpu_id, temperature)
+        with ChronoContext() as cc:
+            self.model = Model(gpu_id, temperature)
+
         self.logger = logging.getLogger("app")
+        self.logger.info("model loaded in %s", cc.get_formatted_elapsed("%Mm %Ss"))
 
     def run(
         self,
@@ -31,7 +36,7 @@ class App:
         topic_number = 0
         senti_number = 0
 
-        with alive_bar(prompt_generator.count, calibrate=0xF) as bar:
+        with ChronoContext() as cc, alive_bar(prompt_generator.count, calibrate=0xF) as bar:
             for t, s in prompt_generator:
                 # (str, str) because 2 generators
                 if senti_number == sentiment_generator.count:
@@ -46,4 +51,4 @@ class App:
 
                 senti_number += 1
 
-        self.logger.info("done")
+        self.logger.info("done generating in %s", cc.get_formatted_elapsed("%Hh %Mm %Ss"))
