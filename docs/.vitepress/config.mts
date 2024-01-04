@@ -7,7 +7,7 @@ export default defineConfig({
   base: "/twitter-generation/", // for GitHub Pages
 
   head: [
-    ["link", { rel: "icon", href: "/twitter-generation/favicon.ico" }], // for GitHub Pages
+    ["link", { rel: "icon", href: "/twitter-generation/favicon.png" }], // for GitHub Pages
     // ['link', { rel: 'icon', href: '/favicon.png' }],
     [
       "link",
