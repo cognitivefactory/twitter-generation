@@ -14,8 +14,8 @@ hero:
       text: View on GitHub
       link: https://github.com/cognitivefactory/twitter-generation
   image:
-    src: /favicon.png
-    alt: VitePress
+    src: https://onedrive.live.com/embed?resid=DAC5E8A44C554913%21160393&authkey=%21ANs5YVolVkTE-QE
+    alt: favicon.png
 
 features:
   - icon: ✏️
