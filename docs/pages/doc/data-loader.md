@@ -32,9 +32,8 @@ class SomethingGenerator:
     def __iter__(self) -> Generator[str, None, None]:
         with open(self.__path, "r", encoding="utf-8") as f:
             for line in f:
-                line = line.strip()
                 if line and not is_whitespace(line):
-                    yield line
+                    yield line.strip()
 ```
 
 The downsides may include :
